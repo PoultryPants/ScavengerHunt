@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reveal Text Below Button</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .button-group {
+      width: 200px;
+      text-align: left;
+    }
+    button {
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ddd;
+    }
+    .hidden-text {
+      display: none;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Reveal Text Below Button</h1>
+
+  <div class="button-container">
+    <!-- First Button Group -->
+    <div class="button-group">
+      <button onclick="toggleText('text1')">Reveal Text 1</button>
+      <div id="text1" class="hidden-text">This is the first text revealed!</div>
+    </div>
+
+    <!-- Second Button Group -->
+    <div class="button-group">
+      <button onclick="toggleText('text2')">Reveal Text 2</button>
+      <div id="text2" class="hidden-text">Here is the second piece of text!</div>
+    </div>
+
+    <!-- Third Button Group -->
+    <div class="button-group">
+      <button onclick="toggleText('text3')">Reveal Text 3</button>
+      <div id="text3" class="hidden-text">Finally, the third text appears!</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleText(id) {
+      // Get the selected text element
+      const textElement = document.getElementById(id);
+
+      // Toggle its display property
+      if (textElement.style.display === 'none' || textElement.style.display === '') {
+        textElement.style.display = 'block';
+      } else {
+        textElement.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>
