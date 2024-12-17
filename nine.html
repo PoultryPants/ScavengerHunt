@@ -72,8 +72,7 @@
   <h1>Clue #9</h1>
 
   <!-- Current Clue Text -->
-  <div id="currentClue" style="font-size: 18px; margin-bottom: 20px;">I help you plan your time to play, behind me is where your clue will stay. In the lounge, where rooms are booked, look behind me and take a look!
-</div>
+  <div id="currentClue" style="font-size: 18px; margin-bottom: 20px;">I help you plan your time to play, behind me is where your clue will stay. In the lounge, where rooms are booked, look behind me and take a look!</div>
 
   <div class="button-container">
     <!-- First Button: Reveals Text -->
@@ -124,13 +123,15 @@
     function askConfirmation() {
       const confirmed = confirm("Are you sure?");
       if (confirmed) {
-        goToLink('REEPPLLAACCE');
-      }
-    }
+        // Insert a line break and then append the "HELLO WORLD" text
+        const lineBreak = document.createElement("br");
+        const helloWorldText = document.createElement("div");
+        helloWorldText.innerText = "You’ve made it far, now one last task—look beneath Ms. Cline’s desk to find the prize you’ve earned at last!";
 
-    function goToLink(url) {
-      // Redirect to the provided URL
-      window.location.href = url;
+        // Append the line break and the text below the button
+        document.body.appendChild(lineBreak);
+        document.body.appendChild(helloWorldText);
+      }
     }
 
     function checkRevealState() {
