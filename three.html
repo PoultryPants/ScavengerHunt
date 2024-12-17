@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clue #3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .button-group {
+      width: 200px;
+      text-align: left;
+    }
+    button {
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ddd;  /* Hover effect for regular buttons */
+    }
+    .button-red {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 2px solid #d32f2f;  /* Dark red border */
+      background-color: #f44336;  /* Red background */
+      color: white;  /* White text */
+      transition: background-color 0.3s ease;
+    }
+    .button-red:hover {
+      background-color: #d32f2f;  /* Darker red when hovered */
+    }
+    .hidden-text, .hidden-image {
+      display: none;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .fade-in {
+      opacity: 0;
+      display: none;
+      transition: opacity 1s ease-in-out;
+    }
+    .fade-in.visible {
+      display: block;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Clue #3</h1>
+
+  <div id="currentClue" style="font-size: 18px; margin-bottom: 20px;">I’m big, bright, and help you see what the teacher wants to show. Check behind me for what you need to know.</div>
+
+  <div class="button-container">
+    <!-- First Button: Reveals Text -->
+    <div class="button-group">
+      <button onclick="toggleText('text1')">Give me a hint</button>
+      <div id="text1" class="hidden-text">Behind the big screen in the jazz room</div>
+    </div>
+
+    <!-- Second Button: Reveals Image -->
+    <div class="button-group">
+      <button onclick="toggleImage('image1')">Reveal a picture</button>
+      <div id="image1" class="hidden-image">
+        <img src="REEPPLLAACCE" alt="blank">
+      </div>
+    </div>
+
+    <!-- Third Button: Initially Hidden -->
+    <div class="button-group fade-in" id="thirdButton">
+      <button class="button-red" onclick="askConfirmation()">Skip to next clue</button>
+    </div>
+
+    <!-- Bottom Text: Initially Hidden -->
+    <div class="fade-in" id="finalText">
+      Are you extra stuck, and none of the hints are helping you?<br/>
+      You can contact this secret email address (but it might take a while to respond!):<br/>
+      <a href="mailto:elects22affixes@icloud.com">elects22affixes@icloud.com</a>
+    </div>
+  </div>
+
+  <script>
+    let textRevealed = false;
+    let imageRevealed = false;
+
+    function toggleText(id) {
+      const element = document.getElementById(id);
+      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+      textRevealed = true;
+      checkRevealState();
+    }
+
+    function toggleImage(id) {
+      const element = document.getElementById(id);
+      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+      imageRevealed = true;
+      checkRevealState();
+    }
+
+    function askConfirmation() {
+      const confirmed = confirm("Are you sure?");
+      if (confirmed) {
+        goToLink('REEPPLLAACCE');
+      }
+    }
+
+    function goToLink(url) {
+      // Redirect to the provided URL
+      window.location.href = url;
+    }
+
+    function checkRevealState() {
+      if (textRevealed && imageRevealed) {
+        // Make third button and final text visible
+        document.getElementById('thirdButton').classList.add('visible');
+        document.getElementById('finalText').classList.add('visible');
+      }
+    }
+  </script>
+
+</body>
+</html>
