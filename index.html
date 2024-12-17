@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reveal Text Below Button</title>
+  <title>Buttons with Custom Actions</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -32,48 +32,59 @@
     button:hover {
       background-color: #ddd;
     }
-    .hidden-text {
+    .hidden-text, .hidden-image {
       display: none;
       margin-top: 10px;
       font-size: 16px;
+    }
+    img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Reveal Text Below Button</h1>
+  <h1>Buttons with Custom Actions</h1>
 
   <div class="button-container">
-    <!-- First Button Group -->
+    <!-- First Button: Reveals Text -->
     <div class="button-group">
-      <button onclick="toggleText('text1')">Reveal Text 1</button>
+      <button onclick="toggleText('text1')">Reveal Text</button>
       <div id="text1" class="hidden-text">This is the first text revealed!</div>
     </div>
 
-    <!-- Second Button Group -->
+    <!-- Second Button: Reveals Image -->
     <div class="button-group">
-      <button onclick="toggleText('text2')">Reveal Text 2</button>
-      <div id="text2" class="hidden-text">Here is the second piece of text!</div>
+      <button onclick="toggleImage('image1')">Reveal Image</button>
+      <div id="image1" class="hidden-image">
+        <img src="https://via.placeholder.com/300" alt="Placeholder Image">
+      </div>
     </div>
 
-    <!-- Third Button Group -->
+    <!-- Third Button: Redirect to Link -->
     <div class="button-group">
-      <button onclick="toggleText('text3')">Reveal Text 3</button>
-      <div id="text3" class="hidden-text">Finally, the third text appears!</div>
+      <button onclick="goToLink('https://example.com')">Go to Link</button>
     </div>
   </div>
 
   <script>
     function toggleText(id) {
-      // Get the selected text element
-      const textElement = document.getElementById(id);
+      const element = document.getElementById(id);
+      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+    }
 
-      // Toggle its display property
-      if (textElement.style.display === 'none' || textElement.style.display === '') {
-        textElement.style.display = 'block';
-      } else {
-        textElement.style.display = 'none';
-      }
+    function toggleImage(id) {
+      const element = document.getElementById(id);
+      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+    }
+
+    function goToLink(url) {
+      // Redirect to the provided URL
+      window.location.href = url;
     }
   </script>
 
