@@ -30,19 +30,19 @@
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #ddd;  /* Hover effect for regular buttons */
+      background-color: #ddd;
     }
     .button-red {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      border: 2px solid #d32f2f;  /* Dark red border */
-      background-color: #f44336;  /* Red background */
-      color: white;  /* White text */
+      border: 2px solid #d32f2f;
+      background-color: #f44336;
+      color: white;
       transition: background-color 0.3s ease;
     }
     .button-red:hover {
-      background-color: #d32f2f;  /* Darker red when hovered */
+      background-color: #d32f2f;
     }
     .hidden-text, .hidden-image {
       display: none;
@@ -65,6 +65,9 @@
       display: block;
       opacity: 1;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -75,51 +78,69 @@
   <div id="currentClue" style="font-size: 18px; margin-bottom: 20px;">I sit beneath the keys that play, where music fills the air each day. Look below the grand to see your next clue waiting patiently.</div>
 
   <div class="button-container">
-    <!-- First Button: Reveals Text -->
-    <div class="button-group">
-      <button onclick="toggleText('text1')">Give me a hint</button>
-      <div id="text1" class="hidden-text">Look beneath the Grand Piano in the Jazz Room.</div>
+    <!-- First Button: Reveals Text and Shows Second Button -->
+    <div class="button-group" id="firstButtonGroup">
+      <button onclick="revealTextAndSecondButton('text1', 'secondButtonGroup')">Give me a hint</button>
+      <div id="text1" class="hidden-text">Maddy plays on this every day.</div>
     </div>
 
-    <!-- Second Button: Reveals Image -->
-    <div class="button-group">
-      <button onclick="toggleImage('image1')">Reveal a picture</button>
+    <!-- Second Button: Reveals Image, Text, and Shows Third Button -->
+    <div class="button-group hidden" id="secondButtonGroup">
+      <button onclick="revealImageTextAndThirdButton('image1', 'text2', 'thirdButtonGroup')">Reveal the answer</button>
+      <div id="text2" class="hidden-text">Look under the Grand Piano in the Jazz Room. It's hidden very far under the piano, it might be hard to get.</div>
       <div id="image1" class="hidden-image">
-        <img src="REEPPLLAACCE" alt="blank">
+        <img src="eight.jpg" alt="Placeholder Image">
       </div>
     </div>
 
     <!-- Third Button: Initially Hidden -->
-    <div class="button-group fade-in" id="thirdButton">
+    <div class="button-group hidden fade-in" id="thirdButtonGroup">
       <button class="button-red" onclick="askConfirmation()">Skip to next clue</button>
-    </div>
-
-    <!-- Bottom Text: Initially Hidden -->
-    <div class="fade-in" id="finalText">
-      Are you extra stuck, and none of the hints are helping you?<br/>
-      You can contact this secret email address (but it might take a while to respond!):<br/>
-      <a href="mailto:elects22affixes@icloud.com">elects22affixes@icloud.com</a>
     </div>
   </div>
 
+  <!-- Bottom Text: Initially Hidden -->
+  <div class="fade-in hidden" id="finalText">
+    <br/>Are you extra stuck, and none of the hints are helping you?<br/>
+    You can contact this secret email address (but it might take a while to respond!):<br/>
+    <a href="mailto:elects22affixes@icloud.com">elects22affixes@icloud.com</a>
+  </div>
+
   <script>
-    let textRevealed = false;
-    let imageRevealed = false;
+    // First button: Reveals text and makes second button visible
+    function revealTextAndSecondButton(textId, secondButtonGroupId) {
+      const textElement = document.getElementById(textId);
+      const secondButtonGroup = document.getElementById(secondButtonGroupId);
 
-    function toggleText(id) {
-      const element = document.getElementById(id);
-      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
-      textRevealed = true;
-      checkRevealState();
+      // Reveal the hint text
+      textElement.style.display = 'block';
+
+      // Reveal the second button group
+      secondButtonGroup.classList.remove('hidden');
+      secondButtonGroup.classList.add('fade-in', 'visible');
     }
 
-    function toggleImage(id) {
-      const element = document.getElementById(id);
-      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
-      imageRevealed = true;
-      checkRevealState();
+    // Second button: Reveals image, text, third button, and bottom text
+    function revealImageTextAndThirdButton(imageId, textId, thirdButtonGroupId) {
+      const imageElement = document.getElementById(imageId);
+      const textElement = document.getElementById(textId);
+      const thirdButtonGroup = document.getElementById(thirdButtonGroupId);
+      const finalText = document.getElementById('finalText');
+
+      // Reveal the image and text
+      imageElement.style.display = 'block';
+      textElement.style.display = 'block';
+
+      // Reveal the third button group
+      thirdButtonGroup.classList.remove('hidden');
+      thirdButtonGroup.classList.add('fade-in', 'visible');
+
+      // Reveal the bottom text
+      finalText.classList.remove('hidden');
+      finalText.classList.add('fade-in', 'visible');
     }
 
+    // Third button: Ask for confirmation
     function askConfirmation() {
       const confirmed = confirm("Are you sure?");
       if (confirmed) {
@@ -130,14 +151,6 @@
     function goToLink(url) {
       // Redirect to the provided URL
       window.location.href = url;
-    }
-
-    function checkRevealState() {
-      if (textRevealed && imageRevealed) {
-        // Make third button and final text visible
-        document.getElementById('thirdButton').classList.add('visible');
-        document.getElementById('finalText').classList.add('visible');
-      }
     }
   </script>
 
